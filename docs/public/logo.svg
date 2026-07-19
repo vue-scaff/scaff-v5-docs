@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Scaff</title>
+  <defs>
+    <linearGradient id="top" x1="30" y1="19" x2="94" y2="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f58498"/>
+      <stop offset=".48" stop-color="#e54865"/>
+      <stop offset="1" stop-color="#c92f50"/>
+    </linearGradient>
+    <linearGradient id="left" x1="18" y1="45" x2="66" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d83d5c"/>
+      <stop offset="1" stop-color="#a91f3e"/>
+    </linearGradient>
+    <linearGradient id="right" x1="66" y1="65" x2="112" y2="104" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e95973"/>
+      <stop offset="1" stop-color="#b82646"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-15%" width="140%" height="145%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#74152c" flood-opacity=".28"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadow)" stroke-linejoin="round">
+    <g stroke="#8f1733" stroke-width="8">
+      <path d="M64 10 116 40 64 70 12 40Z" fill="url(#top)"/>
+      <path d="M12 40 64 70v52L12 92Z" fill="url(#left)"/>
+      <path d="M64 70 116 40v52l-52 30Z" fill="url(#right)"/>
+    </g>
+
+    <g fill="none" stroke="#fff8f9" stroke-width="3">
+      <path d="M64 10 116 40 64 70 12 40Z"/>
+      <path d="M12 40 64 70v52L12 92Z"/>
+      <path d="M64 70 116 40v52l-52 30Z"/>
+    </g>
+
+    <path
+      d="m64 27 23 13-23 13-23-13Z"
+      fill="#fff"
+      fill-opacity=".12"
+      stroke="#fff"
+      stroke-opacity=".62"
+      stroke-width="2.5"
+    />
+    <path d="M64 53v13" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".62"/>
+  </g>
+</svg>

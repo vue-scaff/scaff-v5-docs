@@ -1,0 +1,20 @@
+{
+  "name": "@scaff/v5-docs",
+  "version": "5.0.0-alpha.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.9.0",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vitepress": "^1.6.4"
+  }
+}
