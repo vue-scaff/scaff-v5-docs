@@ -21,7 +21,7 @@ const guideSidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
-    text: '完整场景',
+    text: '示例场景',
     items: [
       { text: '管理后台', link: '/recipes/admin-project' },
       { text: '页面资源组', link: '/recipes/page-resource-group' },
