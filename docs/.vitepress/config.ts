@@ -5,7 +5,7 @@ import sidebar from './sidebar.js';
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: 'Scaff v5.0',
+  title: 'Scaff 5',
   description: '目录驱动、插件优先、框架无关的应用资源运行时',
   cleanUrls: true,
   lastUpdated: true,
@@ -15,7 +15,7 @@ export default defineConfig({
     ['meta', { name: 'author', content: 'Scaff' }],
   ],
   themeConfig: {
-    logo: { src: '/logo.svg', alt: 'Scaff v5.0' },
+    logo: { src: '/logo.svg', alt: 'Scaff 5' },
     nav,
     sidebar,
     outline: {
@@ -52,7 +52,7 @@ export default defineConfig({
     returnToTopLabel: '返回顶部',
     footer: {
       message: '目录即配置 · 资源即插件 · Context 即运行时',
-      copyright: 'Scaff v5 documentation',
+      copyright: 'Scaff 5 documentation',
     },
   },
 });
