@@ -4,4 +4,6 @@
 await scaff.activate('page:user')
 ```
 
-该调用会准备 `global` 与 `page:user` 资源，并行执行对应 loader；其他页面分组保持 `idle`。
+该调用只准备 `page:user` 组，并行执行该组资源的 loader；其他页面分组保持 `idle`。
+
+Core 不会隐式激活名为 `global` 的组。如果项目定义了全局资源组，需要由应用显式激活。

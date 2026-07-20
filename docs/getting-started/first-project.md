@@ -1,7 +1,13 @@
 # 第一个项目
 
-本页将逐步完成 `scaff.config.ts`、Vite 插件、虚拟 Manifest 和 `createScaff()` 初始化。
+推荐直接使用安装器创建已经接好 Vite、Manifest 和运行时适配器的项目：
 
-::: info 编写中
-下一阶段会直接引用 `@scaff-v5-template` 中已经通过构建的代码片段。
-:::
+```bash
+npm create @scaff@alpha my-app
+cd my-app
+npm run dev
+```
+
+安装器会让你选择 Vue、React 或 Core only。三种模板当前提供的运行时能力并不完全相同，具体差异见[框架适配](/frameworks/)。
+
+如果要手动接入已有工程，请从[安装](/guide/installation)和[接入 Vite](/installation/connect-vite)开始。

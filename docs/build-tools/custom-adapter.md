@@ -1,7 +1,7 @@
 # 自定义构建适配器
 
-自定义适配器需要完成三件事：发现 ResourceDefinition、生成 ScaffManifest、在文件新增或删除时使 Manifest 失效。
+当前官方只发布了 `@scaff/vite`，尚未发布 Rollup、Webpack 或其他构建工具适配器。
 
-::: info 编写中
-后续将以最小 Rollup 插件伪代码展示适配器边界。
-:::
+新的构建适配器至少需要完成三项工作：读取 `ResourceDefinition`、发现匹配文件、生成符合 `ScaffManifest` 类型的模块。开发模式下如何监听文件新增和删除，由具体构建工具适配器负责。
+
+在官方适配接口稳定前，不建议把本页视为可直接复制的插件 API。

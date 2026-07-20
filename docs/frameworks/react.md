@@ -61,7 +61,7 @@ export default function Home() {
 }
 ```
 
-这和 Vue 的资源 ID、分组和激活规则相同，差异只在组件层的读取方式。
+这和 Vue 的资源 ID、分组和激活规则相同，但当前 React 适配器没有 Vue 的 `$type.namespace` 暴露、`ScaffView` 或自动组件注册能力。
 
 ## 在组件中读取资源
 
@@ -110,4 +110,4 @@ await scaff.dispose()
 
 ## 适配层不负责什么
 
-`@scaff/react` 不扫描文件，也不内置 React Router、Zustand 或国际化。它们将通过独立插件把对应资源挂接到 Scaff 生命周期。
+`@scaff/react` 不扫描文件，也不内置 React Router、Zustand 或国际化。对应连接器目前尚未实现。

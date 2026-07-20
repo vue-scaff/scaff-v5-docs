@@ -1,8 +1,10 @@
 # 验证与调试
 
-本页将说明如何通过类型检查、生产构建、浏览器 Network 面板和资源注册表验证 Scaff。
+在安装器生成的项目目录中执行：
 
 ```bash
-pnpm typecheck
-pnpm build
+npm run typecheck
+npm run build
 ```
+
+开发时还可以在浏览器 Network 面板确认惰性资源产生的请求；未激活的页面组不应执行对应模块。

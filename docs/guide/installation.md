@@ -82,7 +82,7 @@ cd my-app
 npm run dev
 ```
 
-浏览器会打开一个示例页。Vue 和 React 模板都会从 `page:home` 目录按需发现资源；Vue 页面直接使用 `$store.home` 等自动暴露属性，React 页面通过 `useScaff()` 和资源查询 API 使用同一批资源。
+浏览器会打开一个示例页。Vue 和 React 模板都使用同一套 Core 资源协议；Vue 页面直接使用 `$store.home` 等自动暴露属性，React 当前需要通过 `useScaff()` 和 Core 查询 API 读取资源。React 尚未实现 Vue 式的零 import 组件消费与 `$type.namespace` 暴露。
 
 Vue 模板的 `App.vue` 只保留 `<ScaffView />`。真正的页面结构位于 `src/pages/home/page.vue`，页面直接使用 `$store.home`、`$route.home`、`$i18n.home`、`$service.home` 和插件资源，不导入任何业务资源实现文件。
 

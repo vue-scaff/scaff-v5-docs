@@ -138,4 +138,6 @@ const scaff = createVueScaff({
 
 ## 适配层不负责什么
 
-`@scaff/vue` 不扫描文件，也不内置 Vue Router、Pinia 或国际化。目录扫描仍由 `@scaff/vite` 负责；Vue 适配器只消费已经进入 Manifest 的页面和组件资源。路由、数仓和国际化会继续以可拔插资源插件接入。
+`@scaff/vue` 不扫描文件，也不内置 Vue Router、Pinia 或完整国际化运行时。目录扫描仍由 `@scaff/vite` 负责。
+
+默认模板中的 `$route`、`$store` 和 `$i18n` 是 Scaff 普通资源的自动暴露结果，不分别等同于 Vue Router、Pinia 和 Vue I18n。与这些生态库的连接器目前尚未内置。

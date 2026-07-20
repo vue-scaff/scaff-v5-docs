@@ -1,7 +1,9 @@
 # 快速开始
 
-本章将从空目录开始，建立一个能够自动发现资源、生成 Manifest 并按分组加载的 Scaff 项目。
+使用公网安装器创建项目：
 
-::: tip 当前可运行
-现阶段示例使用 `@scaff/core` 与 `@scaff/vite`，对应同级 `@scaff-v5-template` 工程。
-:::
+```bash
+npm create @scaff@alpha my-app
+```
+
+安装器生成 Vue、React 或 Core only 项目，并接好 Vite、虚拟 Manifest 与对应运行时入口。继续阅读[第一个项目](/getting-started/first-project)。

@@ -57,14 +57,7 @@ import {
   defineConfig,
   defineResourceType,
 } from '@scaff/core'
-
-const getPageName = (file: string): string => {
-  return file.split('/')[1] ?? 'page'
-}
-
-const getPageGroup = (file: string): string => {
-  return `page:${getPageName(file)}`
-}
+import { getPageGroup, getPageName } from '@scaff/utils'
 
 export default defineConfig({
   root: 'src',
