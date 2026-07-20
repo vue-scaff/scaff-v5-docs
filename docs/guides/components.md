@@ -2,9 +2,14 @@
 
 在 Scaff 中，“组件”首先是一种资源类型，而不是被 Core 写死的 Vue 或 React 组件。它可以是组件描述、组件工厂，也可以是由框架插件理解的真实组件模块。
 
-## 默认示例
+## 两种“组件”
 
-安装器会生成一个最小组件资源：
+Scaff 中需要区分两种概念：
+
+- **组件资源**：一个普通资源对象，可以描述组件能力、元数据或工厂函数。
+- **UI 组件**：Vue 的 `.vue` 文件或 React 的组件模块，由对应框架负责渲染。
+
+下面的 `component.ts` 是第一种“组件资源”，不是一个可以直接渲染的 Vue/React 组件。安装器的 Core only 示例会生成它：
 
 ```ts
 // src/pages/home/component.ts
@@ -27,42 +32,35 @@ defineResourceType({
 
 这是一次性的资源类型声明，不是逐个组件注册。之后只要文件符合这个目录规则，Scaff 就会自动发现它们，不需要再调用 `app.component()`，也不需要在页面中逐个 import。
 
-因此 `src/pages/home/component.ts` 会成为 `component:home`，并归入 `page:home` 资源组。只有激活 `page:home` 时，它才会被加载。
+因此 `src/pages/home/component.ts` 会成为 `component:home`，并归入 `page:home` 资源组。只有激活 `page:home` 时，它才会被加载。需要读取这个普通资源对象时，才使用 `getResource()` 查询它。
+
+如果你的目标是使用真实 UI 组件，请直接看下面的 Vue 或 React 示例，不需要为每个组件写注册代码。
 
 ## Vue 中使用
 
+Vue 项目把 `pages/*/components/*.vue` 作为 UI 组件资源。组件放入约定目录后会自动发现、按需加载和注册，页面可以直接使用：
+
+```text
+src/pages/home/components/ResourceCard.vue
+```
+
 ```vue
-<script setup lang="ts">
-import { getResource } from '@scaff/core'
-import { useScaff } from '@scaff/vue'
-
-const scaff = useScaff()
-const component = getResource<{ name: string }>(
-  scaff.context.resources,
-  'component:home',
-)
-</script>
-
 <template>
-  <p>{{ component.value?.name }}</p>
+  <ResourceCard />
 </template>
 ```
 
+不需要 `import ResourceCard`，也不需要调用 `app.component()`。
+
 ## React 中使用
 
-```ts
-import { getResource } from '@scaff/core'
-import { useScaff } from '@scaff/react'
-import { createElement } from 'react'
+React 项目中的 UI 组件仍然使用 React 的组件语法；Scaff 负责发现和按需加载资源，React 适配器负责把模块交给 React 渲染。目录配置和资源分组规则与 Vue 相同，但 React 不使用 Vue 式的全局组件注册：
 
-export default function ComponentName() {
-  const scaff = useScaff()
-  const component = getResource<{ name: string }>(
-    scaff.context.resources,
-    'component:home',
-  )
+```tsx
+import ResourceCard from './components/ResourceCard.js'
 
-  return createElement('p', null, component.value?.name)
+export default function Home() {
+  return <ResourceCard />
 }
 ```
 
