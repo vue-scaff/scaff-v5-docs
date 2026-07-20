@@ -51,6 +51,18 @@ app.mount('#app')
 
 ## 在页面中读取资源
 
+安装器生成的示例页面可以直接使用自动暴露的资源：
+
+```vue
+<template>
+  <p>{{ $store.home.count }}</p>
+  <p>{{ $route.home.path }}</p>
+  <p>{{ $i18n.home['zh-CN'].greeting }}</p>
+</template>
+```
+
+如果希望在 `<script setup>` 中使用显式 API，也可以调用 `useScaffResource()`：
+
 ```vue
 <script setup lang="ts">
 import { useScaffResource } from '@scaff/vue'
