@@ -13,7 +13,7 @@ export default {
 }
 ```
 
-对应的目录规则位于 `scaff.config.ts`：
+安装器已经在 `scaff.config.ts` 中预置了组件目录规则：
 
 ```ts
 defineResourceType({
@@ -24,6 +24,8 @@ defineResourceType({
   mode: 'lazy',
 })
 ```
+
+这是一次性的资源类型声明，不是逐个组件注册。之后只要文件符合这个目录规则，Scaff 就会自动发现它们，不需要再调用 `app.component()`，也不需要在页面中逐个 import。
 
 因此 `src/pages/home/component.ts` 会成为 `component:home`，并归入 `page:home` 资源组。只有激活 `page:home` 时，它才会被加载。
 
@@ -64,11 +66,41 @@ export default function ComponentName() {
 }
 ```
 
-## 扩展为真实 UI 组件
+## Vue 组件的自动注册
+
+在 Vue 模板中，默认规则会匹配：
+
+```text
+src/pages/*/components/*.vue
+```
+
+例如：
+
+```text
+src/pages/home/components/ResourceCard.vue
+src/pages/user/components/UserCard.vue
+```
+
+激活对应页面组后，Vue 适配器会自动加载并注册这些组件。页面可以直接使用组件名称：
+
+```vue
+<template>
+  <ResourceCard />
+</template>
+```
+
+不需要这样做：
+
+```ts
+import ResourceCard from './components/ResourceCard.vue'
+app.component('ResourceCard', ResourceCard)
+```
+
+## 扩展为自定义组件目录
 
 Scaff 可以发现 `.vue`、`.tsx` 等模块，但 Core 不解释它们。推荐由对应框架插件负责以下工作：
 
-1. 声明组件文件匹配规则。
+1. 只有在使用非默认目录时，才需要声明新的组件文件匹配规则。
 2. 约定组件资源 ID 和所属资源组。
 3. 在资源激活后注册、渲染或暴露给业务。
 4. 在资源组停用时执行必要的清理。
