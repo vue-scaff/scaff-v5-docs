@@ -44,6 +44,25 @@ createRoot(target).render(
 
 `ScaffProvider` 只传递上下文。资源发现、分组、按需加载和生命周期仍由 `@scaff/vite` 与 `@scaff/core` 完成。
 
+React 不提供 Vue 式的 `$store.home` 全局属性。默认示例通过 `useScaff()` 获取实例，再由页面模型读取资源：
+
+```tsx
+import { getResource } from '@scaff/core'
+import { useScaff } from '@scaff/react'
+
+export default function Home() {
+  const scaff = useScaff()
+  const store = getResource<{ count: number }>(
+    scaff.context.resources,
+    'store:home',
+  )
+
+  return <p>{store.value?.count}</p>
+}
+```
+
+这和 Vue 的资源 ID、分组和激活规则相同，差异只在组件层的读取方式。
+
 ## 在组件中读取资源
 
 ```ts
