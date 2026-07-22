@@ -69,7 +69,7 @@ npm create @scaff@alpha my-app -- --vue --no-install
 
 | 选择 | 运行依赖 | 适合场景 |
 |---|---|---|
-| Vue | `@scaff/core`、`@scaff/vue`、`@scaff/utils`、`vue` | Vue 3 应用 |
+| Vue | `@scaff/core`、`@scaff/data`、`@scaff/vue`、`@scaff/utils`、`vue` | Vue 3 应用，内置 Request → Service → Store 示例 |
 | React | `@scaff/core`、`@scaff/react`、`@scaff/utils`、`react`、`react-dom` | React 应用 |
 | Core only | `@scaff/core`、`@scaff/utils` | 无 UI 框架、服务层或自定义适配器 |
 
@@ -100,7 +100,7 @@ npm run build
 ::: code-group
 
 ```bash [Vue]
-npm install @scaff/core@alpha @scaff/vue@alpha @scaff/utils@alpha vue
+npm install @scaff/core@alpha @scaff/data@alpha @scaff/vue@alpha @scaff/utils@alpha vue
 npm install --save-dev @scaff/vite@alpha @vitejs/plugin-vue vite
 ```
 

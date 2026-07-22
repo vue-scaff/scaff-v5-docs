@@ -13,6 +13,7 @@ const guideSidebar: DefaultTheme.SidebarItem[] = [
     items: [
       { text: '页面', link: '/guides/pages' },
       { text: '路由', link: '/guides/routes' },
+      { text: '数据请求', link: '/guides/data' },
       { text: '数仓', link: '/guides/stores' },
       { text: '组件', link: '/guides/components' },
       { text: '国际化', link: '/guides/locales' },
@@ -65,6 +66,7 @@ const appendixSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Core API', link: '/api/core' },
       { text: '公共类型', link: '/api/types' },
       { text: 'Vite API', link: '/api/vite' },
+      { text: 'Data API', link: '/api/data' },
     ],
   },
   {

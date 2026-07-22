@@ -1,18 +1,20 @@
 # 数仓
 
-数仓文件放在所属页面目录中，页面组激活时一起加载。
+Store 保存页面状态，并通过同页面 Service 完成异步数据操作。
+
+`defineStore()` 和 Service 注入由已发布的 `@scaff/data` 提供。
 
 ## 文件路径
 
 ```text
-src/pages/home/
+src/pages/users/
 ├── page.vue
-└── store.ts
+├── store.ts
+└── services/
+    └── users.ts
 ```
 
 ## 资源定义
-
-下面只展示数仓对应的规则；实际项目应保留 `resources` 中其他资源类型。
 
 ```ts
 // scaff.config.ts
@@ -36,37 +38,58 @@ export default defineConfig({
 
 | 文件 | Resource ID | Group | Vue 暴露位置 |
 |---|---|---|---|
-| `pages/home/store.ts` | `store:home` | `page:home` | `$store.home` |
+| `pages/users/store.ts` | `store:users` | `page:users` | `$store.users` |
 
-## 数仓代码
+## Store 代码
 
 ```ts
-// src/pages/home/store.ts
-export default {
-  count: 0,
-  status: 'synchronized',
-  increment() {
-    this.count += 1
-  },
-}
-```
+// src/pages/users/store.ts
+import {
+  defineStore,
+  type DataFactoryValue,
+  type StoreFactoryContext,
+} from '@scaff/data'
 
-Vue 适配器会把普通对象转换为响应式对象。
+import type usersService from './services/users.js'
+import type { User } from './services/users.js'
+
+type UsersService = DataFactoryValue<typeof usersService>
+
+export default defineStore(({
+  service,
+}: StoreFactoryContext<{ users: UsersService }>) => ({
+  loading: false,
+  users: [] as User[],
+
+  async load() {
+    this.loading = true
+
+    try {
+      this.users = await service.users.list()
+    } finally {
+      this.loading = false
+    }
+  },
+}))
+```
 
 ## 页面中使用
 
 ```vue
-<!-- src/pages/home/page.vue -->
+<!-- src/pages/users/page.vue -->
 <template>
-  <p>Status: {{ $store.home.status }}</p>
-  <button type="button" @click="$store.home.increment()">
-    Count: {{ $store.home.count }}
+  <button :disabled="$store.users.loading" @click="$store.users.load()">
+    加载用户
   </button>
+
+  <p v-for="user in $store.users.users" :key="user.id">
+    {{ user.name }}
+  </p>
 </template>
 ```
 
-页面不需要导入 `store.ts`，也不需要再次定义变量。
+页面不需要导入 Store 或 Service，也不需要为资源再声明一层变量。
 
 ## 当前边界
 
-`$store.home` 是 Scaff 管理的响应式资源，不是 Pinia、Vuex 或 Zustand Store。对应状态库插件目前尚未内置。
+Vue 适配器会把 Store 对象转换为响应式对象。React 适配器目前尚未提供 Store 订阅 Hook，因此 React 中修改 Store 不会自动触发组件重渲染。

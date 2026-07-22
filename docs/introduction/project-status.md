@@ -9,7 +9,8 @@
 | `@scaff/vite` | `5.0.0-alpha.4` | 目录资源发现、虚拟 Manifest、惰性或立即导入 |
 | `@scaff/vue` | `5.0.0-alpha.4` | Vue 注入、`ScaffView`、页面渲染、组件注册和 `$type.namespace` 暴露 |
 | `@scaff/react` | `5.0.0-alpha.0` | React Context、Provider 和 `useScaff()` |
-| `@scaff/create` | `5.0.0-alpha.10` | Vue、React、Core-only 项目生成与依赖安装 |
+| `@scaff/data` | `5.0.0-alpha.0` | Request Client、Service 工厂、Store 工厂与页面组依赖注入 |
+| `@scaff/create` | `5.0.0-alpha.11` | Vue、React、Core-only 项目生成与依赖安装 |
 
 ## 当前尚未内置
 

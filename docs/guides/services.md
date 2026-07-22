@@ -1,19 +1,20 @@
 # 服务
 
-Service 用于保存页面业务逻辑、数据转换或接口封装。
+Service 用于封装服务端接口、外部 SDK 或业务用例，不用于代替普通格式化函数。
+
+`defineService()` 和 Request 注入由已发布的 `@scaff/data` 提供。
 
 ## 文件路径
 
 ```text
-src/pages/home/
+src/pages/users/
 ├── page.vue
+├── store.ts
 └── services/
-    └── summary.ts
+    └── users.ts
 ```
 
 ## 资源定义
-
-下面只展示 Service 对应的规则；实际项目应保留 `resources` 中其他资源类型。
 
 ```ts
 // scaff.config.ts
@@ -33,28 +34,41 @@ export default defineConfig({
 })
 ```
 
-| 文件 | Resource ID | Group | Vue 暴露位置 |
+| 文件 | Resource ID | Group | 注入 Store 时的名称 |
 |---|---|---|---|
-| `services/summary.ts` | `service:home:summary` | `page:home` | `$service.home.summary` |
+| `services/users.ts` | `service:users:users` | `page:users` | `service.users` |
 
 ## Service 代码
 
 ```ts
-// src/pages/home/services/summary.ts
-export default {
-  describe(count: number) {
-    return `当前已经完成 ${count} 次操作`
-  },
+// src/pages/users/services/users.ts
+import { defineService } from '@scaff/data'
+
+export interface User {
+  id: number
+  name: string
 }
+
+export default defineService(({ request }) => ({
+  list: () => request.get<User[]>('/api/users'),
+  remove: (id: number) => request.delete(`/api/users/${id}`),
+}))
 ```
 
-## 页面中使用
+Request 由 Data 插件注入，Service 文件不创建全局请求实例。
 
-```vue
-<!-- src/pages/home/page.vue -->
-<template>
-  <p>{{ $service.home.summary.describe($store.home.count) }}</p>
-</template>
+## Store 中使用
+
+```ts
+export default defineStore(({
+  service,
+}: StoreFactoryContext<{ users: UsersService }>) => ({
+  users: [] as User[],
+
+  async load() {
+    this.users = await service.users.list()
+  },
+}))
 ```
 
-页面不需要导入 `summary.ts`。同一目录中的多个 Service 会按文件名集中到 `$service.home` 下。
+页面通常只调用 `$store.users.load()`，而不是直接发请求。完整示例见[数据请求](/guides/data)。
